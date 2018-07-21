@@ -18,7 +18,6 @@ public class AuthorListLoader {
 
 
     static List<String> load() {
-        Path path = Paths.get(System.getProperty("user.home"), FILE_NAME);
         try {
             Charset charset = Charset.defaultCharset()
                     .newDecoder()
@@ -26,7 +25,7 @@ public class AuthorListLoader {
                     .onUnmappableCharacter(CodingErrorAction.REPLACE)
                     .charset();
 
-            return Files.readAllLines(path, charset).stream()
+            return Files.readAllLines(configFilePath(), charset).stream()
                     .map(String::trim)
                     .filter(line -> !line.isEmpty())
                     .collect(Collectors.toList());
@@ -34,6 +33,11 @@ public class AuthorListLoader {
             PluginManager.getLogger().error(e);
             return Collections.emptyList();
         }
+    }
+
+
+    static Path configFilePath() {
+        return Paths.get(System.getProperty("user.home"), FILE_NAME);
     }
 
 }

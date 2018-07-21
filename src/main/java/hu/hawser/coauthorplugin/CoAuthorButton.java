@@ -3,6 +3,7 @@ package hu.hawser.coauthorplugin;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.ui.Messages;
 
 import java.util.List;
 
@@ -12,10 +13,20 @@ public class CoAuthorButton extends AnAction {
         super(AllIcons.Actions.Edit);
     }
 
+
     @Override
     public void actionPerformed(AnActionEvent event) {
         List<String> authorList = AuthorListLoader.load();
-        // TODO: do not open selector if there are no authors
+
+        if (authorList.isEmpty()) {
+            Messages.showMessageDialog(
+                    event.getProject(),
+                    "No authors found in " + AuthorListLoader.configFilePath(),
+                    "Error",
+                    Messages.getErrorIcon());
+
+            return;
+        }
 
         CoAuthorSelector selector = new CoAuthorSelector(event.getProject(), authorList);
         boolean closedWithOK = selector.showAndGet();
