@@ -4,7 +4,6 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CoAuthorButton extends AnAction {
@@ -15,7 +14,7 @@ public class CoAuthorButton extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent event) {
-        List<String> authorList = Arrays.asList("name <name@example.com>", "another-name <another-name@example.com>");
+        List<String> authorList = AuthorListLoader.load();
         // TODO: do not open selector if there are no authors
 
         CoAuthorSelector selector = new CoAuthorSelector(event.getProject(), authorList);
