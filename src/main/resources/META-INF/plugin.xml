@@ -21,7 +21,7 @@
     <actions>
         <!-- Add your actions here -->
         <action id="CoAuthor.Button" class="hu.hawser.coauthorplugin.CoAuthorButton" text="Co-Author"
-                description="Attribute commit to more authors">
+                description="Attribute commit to more authors" icon="Icons.USERS">
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
         </action>
     </actions>
