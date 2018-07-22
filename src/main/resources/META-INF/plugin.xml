@@ -1,18 +1,18 @@
 <idea-plugin>
     <id>hu.hawser.co-author-plugin</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <name>Co-Author</name>
+    <vendor email="robert.gargya@gmail.com" url="https://github.com/hawser86">Robert Gargya</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Attribute commits to more authors using the <strong>Co-authored-by:</strong> commit trailers based on the
+    <a href="https://help.github.com/articles/creating-a-commit-with-multiple-authors/">Creating a commit with
+    multiple authors</a> article.
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
-    <!-- uncomment to enable plugin in all products
     <depends>com.intellij.modules.lang</depends>
-    -->
+    <depends>com.intellij.modules.vcs</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
