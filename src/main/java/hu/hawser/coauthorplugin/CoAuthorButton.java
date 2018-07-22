@@ -4,6 +4,9 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vcs.CheckinProjectPanel;
+import com.intellij.openapi.vcs.ui.Refreshable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -29,13 +32,38 @@ public class CoAuthorButton extends AnAction {
         }
 
         CoAuthorSelector selector = new CoAuthorSelector(event.getProject(), authorList);
-        boolean closedWithOK = selector.showAndGet();
-
-        if (closedWithOK) {
-            System.out.println("OK");
-            selector.getSelectedAuthors().forEach(System.out::println);
-        } else {
-            System.out.println("Cancel");
+        if (!selector.showAndGet()) {
+            return;
         }
+
+        CheckinProjectPanel checkinPanel = getCheckinPanel(event);
+        if (checkinPanel == null) {
+            return;
+        }
+
+        updateCommitMessage(checkinPanel, selector.getSelectedAuthors());
     }
+
+
+    @Nullable
+    private static CheckinProjectPanel getCheckinPanel(@Nullable AnActionEvent e) {
+        if (e == null) {
+            return null;
+        }
+        Refreshable data = Refreshable.PANEL_KEY.getData(e.getDataContext());
+        if (data instanceof CheckinProjectPanel) {
+            return (CheckinProjectPanel) data;
+        }
+        return null;
+    }
+
+
+    private void updateCommitMessage(CheckinProjectPanel checkinPanel, List<String> authors) {
+        String message = CommitMessageGenerator.addCoAuthors(
+                checkinPanel.getCommitMessage(),
+                authors
+        );
+        checkinPanel.setCommitMessage(message);
+    }
+
 }
