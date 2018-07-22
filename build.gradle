@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'hu.hawser'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 sourceCompatibility = 1.8
 
@@ -17,10 +17,10 @@ dependencies {
 }
 
 intellij {
-    version '2018.1.6'
+    version '2018.1'
+    intellij.updateSinceUntilBuild false //Disables updating since-build attribute in plugin.xml
 }
-patchPluginXml {
-    changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+publishPlugin {
+    username intellijPublishUsername
+    password intellijPublishPassword
 }
