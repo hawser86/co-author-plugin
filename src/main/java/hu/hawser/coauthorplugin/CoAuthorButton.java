@@ -19,6 +19,11 @@ public class CoAuthorButton extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent event) {
+        CheckinProjectPanel checkinPanel = getCheckinPanel(event);
+        if (checkinPanel == null) {
+            return;
+        }
+
         List<String> authorList = AuthorListLoader.load();
 
         if (authorList.isEmpty()) {
@@ -33,11 +38,6 @@ public class CoAuthorButton extends AnAction {
 
         CoAuthorSelector selector = new CoAuthorSelector(event.getProject(), authorList);
         if (!selector.showAndGet()) {
-            return;
-        }
-
-        CheckinProjectPanel checkinPanel = getCheckinPanel(event);
-        if (checkinPanel == null) {
             return;
         }
 
