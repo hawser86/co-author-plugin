@@ -3,11 +3,24 @@
     <name>Co-Author</name>
     <vendor email="robert.gargya@gmail.com" url="https://github.com/hawser86">Robert Gargya</vendor>
 
+    <version>1.0</version>
+    <change-notes>
+        &lt;p&gt;1.0&lt;/p&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Initial version&lt;/li&gt;
+        &lt;/ul&gt;
+    </change-notes>
+
     <description><![CDATA[
-    Attribute commits to more authors using the <strong>Co-authored-by:</strong> commit trailers based on the
+    <p>Attribute commits to more authors using the <strong>Co-authored-by:</strong> commit trailers based on the
     <a href="https://help.github.com/articles/creating-a-commit-with-multiple-authors/">Creating a commit with
-    multiple authors</a> article.
+    multiple authors</a> article.</p>
+
+    <p>The possible co-authors must be configured as described
+    <a href="https://github.com/hawser86/co-author-plugin#configuration">here</a></p>
     ]]></description>
+
+    <idea-version since-build="181.4203" until-build="181.*"/>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
