@@ -18,6 +18,8 @@
 
     <p>The possible co-authors must be configured as described
     <a href="https://github.com/hawser86/co-author-plugin#configuration">here</a></p>
+
+    <p><img src="https://github.com/hawser86/co-author-plugin/raw/master/screenshot.png"></p>
     ]]></description>
 
     <idea-version since-build="181.4203"/>
