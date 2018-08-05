@@ -3,8 +3,13 @@
     <name>Co-Author</name>
     <vendor email="robert.gargya@gmail.com" url="https://github.com/hawser86">Robert Gargya</vendor>
 
-    <version>1.1</version>
+    <version>2.0</version>
     <change-notes><![CDATA[
+        <p>2.0</p>
+        <ul>
+            <li>the author list can be modified using the UI, there is no need to edit the config file manually</li>
+        </ul>
+
         <p>1.1</p>
         <ul>
             <li>add compatibility with newer IDE releases</li>
