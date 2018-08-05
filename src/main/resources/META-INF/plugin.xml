@@ -3,13 +3,19 @@
     <name>Co-Author</name>
     <vendor email="robert.gargya@gmail.com" url="https://github.com/hawser86">Robert Gargya</vendor>
 
-    <version>1.0</version>
-    <change-notes>
-        &lt;p&gt;1.0&lt;/p&gt;
-        &lt;ul&gt;
-            &lt;li&gt;Initial version&lt;/li&gt;
-        &lt;/ul&gt;
-    </change-notes>
+    <version>1.1</version>
+    <change-notes><![CDATA[
+        <p>1.1</p>
+        <ul>
+            <li>add compatibility with newer IDE releases</li>
+            <li>improve plugin description</li>
+        </ul>
+
+        <p>1.0</p>
+        <ul>
+            <li>Initial version</li>
+        </ul>
+    ]]></change-notes>
 
     <description><![CDATA[
     <p>Attribute commits to more authors using the <strong>Co-authored-by:</strong> commit trailers based on the
