@@ -10,20 +10,25 @@ TBA
 
 ### Configuration
 
-Create a config file in your user's HOME directory with the `.git_coauthors` name (e.g.:  `~/.git_coauthors` or 
-`C:\Users\bill\.git_coauthors`) and populate it with the names and email addresses of your teammates, co-workers.
-Every person's data should go to a new line using the `username <email.address@example.com>` format. E.g.:
+The plugin stores the list of teammates, co-workers in your user's HOME directory in the `.git_coauthors` file
+(e.g.:  `~/.git_coauthors` or `C:\Users\bill\.git_coauthors`). Every person's data is stored using the
+`username <email.address@example.com>` format. E.g.:
 
     name <name@example.com>
     another-name <another-name@example.com>
+    
+The config file will be created at the first usage. Feel free to modify this, however the author list can be edited
+using the UI. 
 
 ### Usage
 
 ![screenshot](screenshot.png)
 
 In the `Commit Changes` dialog, after you finished composing your commit message, click on the Co-Author icon
-![icon](src/main/resources/icons/users.png), select your co-authors and click `OK`. The commit message will be updated
+![icon](src/main/resources/icons/users.png), select your co-author(s) and click `OK`. The commit message will be updated
 instantly.
+
+Authors can be added / removed with the proper button, or modified by double-clicking on them.
 
 ### Credits
 
