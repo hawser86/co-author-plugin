@@ -2,14 +2,20 @@ package hu.hawser.coauthorplugin;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vcs.CheckinProjectPanel;
 import com.intellij.openapi.vcs.ui.Refreshable;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CoAuthorButton extends AnAction {
+
+    private static final List<String> DEFAULT_AUTHORS = Arrays.asList(
+            "name <name@example.com>",
+            "change-me <change-me@example.com>"
+    );
+
 
     @Override
     public void actionPerformed(AnActionEvent event) {
@@ -21,13 +27,7 @@ public class CoAuthorButton extends AnAction {
         List<String> authorList = AuthorListLoader.load();
 
         if (authorList.isEmpty()) {
-            Messages.showMessageDialog(
-                    event.getProject(),
-                    "No authors found in " + AuthorListLoader.configFilePath(),
-                    "Error",
-                    Messages.getErrorIcon());
-
-            return;
+            authorList = DEFAULT_AUTHORS;
         }
 
         CoAuthorSelector selector = new CoAuthorSelector(event.getProject(), authorList);
