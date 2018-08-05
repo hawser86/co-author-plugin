@@ -6,7 +6,8 @@ article.
 
 ### Installation
 
-TBA
+The plugin can be installed like any other plugin using the IDE:
+`File` / `Settings...` / `Plugins` / `Browse repositories...` / `Co-Author`
 
 ### Configuration
 
