@@ -19,13 +19,7 @@ public class AuthorListLoader {
 
     static List<String> load() {
         try {
-            Charset charset = Charset.defaultCharset()
-                    .newDecoder()
-                    .onMalformedInput(CodingErrorAction.REPLACE)
-                    .onUnmappableCharacter(CodingErrorAction.REPLACE)
-                    .charset();
-
-            return Files.readAllLines(configFilePath(), charset).stream()
+            return Files.readAllLines(configFilePath(), charset()).stream()
                     .map(String::trim)
                     .filter(line -> !line.isEmpty())
                     .collect(Collectors.toList());
@@ -33,6 +27,24 @@ public class AuthorListLoader {
             PluginManager.getLogger().error(e);
             return Collections.emptyList();
         }
+    }
+
+
+    static void save(List<String> authors) {
+        try {
+            Files.write(configFilePath(), authors, charset());
+        } catch (IOException e) {
+            PluginManager.getLogger().error(e);
+        }
+    }
+
+
+    private static Charset charset() {
+        return Charset.defaultCharset()
+                .newDecoder()
+                .onMalformedInput(CodingErrorAction.REPLACE)
+                .onUnmappableCharacter(CodingErrorAction.REPLACE)
+                .charset();
     }
 
 

@@ -35,6 +35,11 @@ public class CoAuthorButton extends AnAction {
             return;
         }
 
+        List<String> modifiedAuthorList = selector.getAllAuthor();
+        if (!modifiedAuthorList.equals(authorList)) {
+            AuthorListLoader.save(modifiedAuthorList);
+        }
+
         updateCommitMessage(checkinPanel, selector.getSelectedAuthors());
     }
 

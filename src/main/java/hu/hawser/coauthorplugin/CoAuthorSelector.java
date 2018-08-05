@@ -73,5 +73,10 @@ public class CoAuthorSelector extends DialogWrapper {
         return tableModel.getSelectedAuthors();
     }
 
+
+    List<String> getAllAuthor() {
+        return tableModel.getAllAuthor();
+    }
+
 }
 

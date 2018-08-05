@@ -50,12 +50,15 @@ public class AuthorTableModel extends AbstractTableModel {
         if (columnIndex == 0) {
             tableData.get(rowIndex).selected = (boolean)value;
         }
+        if (columnIndex == 1) {
+            tableData.get(rowIndex).author = (String)value;
+        }
     }
 
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 0;
+        return true;
     }
 
 
@@ -68,6 +71,13 @@ public class AuthorTableModel extends AbstractTableModel {
     List<String> getSelectedAuthors() {
         return tableData.stream()
                 .filter(rowData -> rowData.selected)
+                .map(rowData -> rowData.author)
+                .collect(Collectors.toList());
+    }
+
+
+    List<String> getAllAuthor() {
+        return tableData.stream()
                 .map(rowData -> rowData.author)
                 .collect(Collectors.toList());
     }
