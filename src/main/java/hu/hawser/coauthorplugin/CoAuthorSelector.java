@@ -1,5 +1,7 @@
 package hu.hawser.coauthorplugin;
 
+import com.intellij.icons.AllIcons;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.table.JBTable;
@@ -32,15 +34,47 @@ public class CoAuthorSelector extends DialogWrapper {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
+        JBTable table = createTable();
+        mainPanel.add(table, BorderLayout.CENTER);
+        mainPanel.add(createToolbar(table), BorderLayout.SOUTH);
+
+        return mainPanel;
+    }
+
+
+    private JBTable createTable() {
         JBTable table = new JBTable(tableModel);
 
         resizeColumnWidthToFitContent(table);
         preventResizingFirstColumn(table);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
-        mainPanel.add(table, BorderLayout.CENTER);
+        return table;
+    }
 
-        return mainPanel;
+
+    private JPanel createToolbar(JBTable table) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        DefaultActionGroup actionGroup = new DefaultActionGroup();
+        actionGroup.add(new AnAction("Add", "Add new author to the list", AllIcons.ToolbarDecorator.Add) {
+            @Override
+            public void actionPerformed(AnActionEvent e) {
+                tableModel.addRow();
+            }
+        });
+        actionGroup.add(new AnAction("Remove", "Remove selected authors from the list", AllIcons.ToolbarDecorator.Remove) {
+            @Override
+            public void actionPerformed(AnActionEvent e) {
+                tableModel.removeRows(table.getSelectedRows());
+            }
+        });
+
+        ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar("MyToolbar", actionGroup, true);
+        panel.add(toolbar.getComponent());
+
+        return panel;
     }
 
 

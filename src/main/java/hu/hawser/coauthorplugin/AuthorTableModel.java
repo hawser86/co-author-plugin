@@ -1,6 +1,7 @@
 package hu.hawser.coauthorplugin;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,21 @@ public class AuthorTableModel extends AbstractTableModel {
         if (columnIndex == 1) {
             tableData.get(rowIndex).author = (String)value;
         }
+    }
+
+
+    void addRow() {
+        tableData.add(new RowData(false, ""));
+        fireTableDataChanged();
+    }
+
+
+    void removeRows(int[] selectedRows) {
+        Arrays.sort(selectedRows);
+        for (int i = selectedRows.length - 1; i >= 0; i--) {
+            tableData.remove(selectedRows[i]);
+        }
+        fireTableDataChanged();
     }
 
 
