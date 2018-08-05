@@ -38,6 +38,8 @@ public class CoAuthorSelector extends DialogWrapper {
         mainPanel.add(table, BorderLayout.CENTER);
         mainPanel.add(createToolbar(table), BorderLayout.SOUTH);
 
+        tableModel.addTableModelListener(e -> pack());
+
         return mainPanel;
     }
 
