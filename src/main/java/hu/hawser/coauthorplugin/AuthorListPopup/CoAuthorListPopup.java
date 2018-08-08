@@ -35,17 +35,18 @@ public class CoAuthorListPopup extends BaseListPopupStep<AuthorListElement> {
     @Override
     public PopupStep onChosen(AuthorListElement selectedValue, boolean finalChoice) {
         if (selectedValue instanceof MoreOptionsElement) {
+            doFinalStep(() -> {
+                CoAuthorSelector selector = new CoAuthorSelector(project, authorList);
+                if (!selector.showAndGet()) {
+                    return;
+                }
 
-            CoAuthorSelector selector = new CoAuthorSelector(project, authorList);
-            if (!selector.showAndGet()) {
-                return null;
-            }
-
-            List<String> modifiedAuthorList = selector.getAllAuthor();
-            if (!modifiedAuthorList.equals(authorList)) {
-                AuthorListLoader.save(modifiedAuthorList);
-            }
-            selectionHandler.onItemsSelected(selector.getSelectedAuthors());
+                List<String> modifiedAuthorList = selector.getAllAuthor();
+                if (!modifiedAuthorList.equals(authorList)) {
+                    AuthorListLoader.save(modifiedAuthorList);
+                }
+                selectionHandler.onItemsSelected(selector.getSelectedAuthors());
+            });
             return super.onChosen(selectedValue, finalChoice);
         } else {
             selectionHandler.onItemsSelected(Arrays.asList(selectedValue.getText()));
