@@ -24,7 +24,6 @@ public class AuthorListLoader {
                     .filter(line -> !line.isEmpty())
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            PluginManager.getLogger().error(e);
             return Collections.emptyList();
         }
     }
@@ -48,7 +47,7 @@ public class AuthorListLoader {
     }
 
 
-    static Path configFilePath() {
+    private static Path configFilePath() {
         return Paths.get(System.getProperty("user.home"), FILE_NAME);
     }
 
