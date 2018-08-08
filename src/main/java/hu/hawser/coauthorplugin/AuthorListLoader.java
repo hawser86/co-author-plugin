@@ -30,7 +30,7 @@ public class AuthorListLoader {
     }
 
 
-    static void save(List<String> authors) {
+    public static void save(List<String> authors) {
         try {
             Files.write(configFilePath(), authors, charset());
         } catch (IOException e) {

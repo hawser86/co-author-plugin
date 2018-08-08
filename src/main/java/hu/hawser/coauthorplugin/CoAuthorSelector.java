@@ -19,7 +19,7 @@ public class CoAuthorSelector extends DialogWrapper {
     private AuthorTableModel tableModel;
 
 
-    CoAuthorSelector(@Nullable Project project, List<String> authorList) {
+    public CoAuthorSelector(@Nullable Project project, List<String> authorList) {
         super(project);
         tableModel = new AuthorTableModel(authorList);
 
@@ -105,12 +105,12 @@ public class CoAuthorSelector extends DialogWrapper {
     }
 
 
-    List<String> getSelectedAuthors() {
+    public List<String> getSelectedAuthors() {
         return tableModel.getSelectedAuthors();
     }
 
 
-    List<String> getAllAuthor() {
+    public List<String> getAllAuthor() {
         return tableModel.getAllAuthor();
     }
 
