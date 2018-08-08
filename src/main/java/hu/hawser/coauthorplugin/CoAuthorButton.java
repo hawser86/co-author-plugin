@@ -2,8 +2,11 @@ package hu.hawser.coauthorplugin;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.intellij.openapi.ui.popup.ListPopup;
 import com.intellij.openapi.vcs.CheckinProjectPanel;
 import com.intellij.openapi.vcs.ui.Refreshable;
+import hu.hawser.coauthorplugin.AuthorListPopup.CoAuthorListPopup;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -24,23 +27,16 @@ public class CoAuthorButton extends AnAction {
             return;
         }
 
-        List<String> authorList = AuthorListLoader.load();
+        List<String> loadedAuthorList = AuthorListLoader.load();
 
-        if (authorList.isEmpty()) {
-            authorList = DEFAULT_AUTHORS;
-        }
+        final List<String> authorList = loadedAuthorList.isEmpty() ? DEFAULT_AUTHORS : loadedAuthorList;
 
-        CoAuthorSelector selector = new CoAuthorSelector(event.getProject(), authorList);
-        if (!selector.showAndGet()) {
-            return;
-        }
+        CoAuthorListPopup popupStep = new CoAuthorListPopup(event.getProject(),"Select Co-Author",
+                authorList,
+                selectedItems -> updateCommitMessage(checkinPanel, selectedItems));
 
-        List<String> modifiedAuthorList = selector.getAllAuthor();
-        if (!modifiedAuthorList.equals(authorList)) {
-            AuthorListLoader.save(modifiedAuthorList);
-        }
-
-        updateCommitMessage(checkinPanel, selector.getSelectedAuthors());
+        ListPopup listPopup = JBPopupFactory.getInstance().createListPopup(popupStep);
+        listPopup.showInBestPositionFor(event.getDataContext());
     }
 
 
