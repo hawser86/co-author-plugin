@@ -60,13 +60,13 @@ public class CoAuthorSelector extends DialogWrapper {
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         DefaultActionGroup actionGroup = new DefaultActionGroup();
-        actionGroup.add(new AnAction("Add", "Add new author to the list", AllIcons.ToolbarDecorator.Add) {
+        actionGroup.add(new AnAction("Add", "Add new author to the list", AllIcons.General.Add) {
             @Override
             public void actionPerformed(AnActionEvent e) {
                 tableModel.addRow();
             }
         });
-        actionGroup.add(new AnAction("Remove", "Remove selected authors from the list", AllIcons.ToolbarDecorator.Remove) {
+        actionGroup.add(new AnAction("Remove", "Remove selected authors from the list", AllIcons.General.Remove) {
             @Override
             public void actionPerformed(AnActionEvent e) {
                 tableModel.removeRows(table.getSelectedRows());
