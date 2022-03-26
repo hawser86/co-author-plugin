@@ -8,11 +8,14 @@ import hu.hawser.coauthorplugin.AuthorListPopup.elements.AuthorElement;
 import hu.hawser.coauthorplugin.AuthorListPopup.elements.AuthorListElement;
 import hu.hawser.coauthorplugin.AuthorListPopup.elements.MoreOptionsElement;
 import hu.hawser.coauthorplugin.CoAuthorSelector;
+import icons.Icons;
 import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 public class CoAuthorListPopup extends BaseListPopupStep<AuthorListElement> {
 
@@ -26,7 +29,12 @@ public class CoAuthorListPopup extends BaseListPopupStep<AuthorListElement> {
     private final ListSelectionHandler<String> selectionHandler;
 
     public CoAuthorListPopup(@NotNull Project project, @NotNull String title, @NotNull List<String> authorList, @NotNull ListSelectionHandler<String> selectionHandler) {
-        super(title, Stream.concat(authorList.stream().map(AuthorElement::new), Stream.of(new MoreOptionsElement())).collect(Collectors.toList()));
+        super(title, Stream.concat(
+                Stream.of(new MoreOptionsElement()),
+                authorList.stream().map(AuthorElement::new)
+            ).collect(toList()),
+            singletonList(Icons.USERS)
+        );
         this.project = project;
         this.authorList = authorList;
         this.selectionHandler = selectionHandler;

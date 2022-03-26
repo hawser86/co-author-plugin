@@ -4,12 +4,12 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.table.JBTable;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.List;
@@ -35,7 +35,8 @@ public class CoAuthorSelector extends DialogWrapper {
         mainPanel.setLayout(new BorderLayout());
 
         JBTable table = createTable();
-        mainPanel.add(table, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JBScrollPane(table);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(createToolbar(table), BorderLayout.SOUTH);
 
         tableModel.addTableModelListener(e -> pack());
@@ -45,10 +46,16 @@ public class CoAuthorSelector extends DialogWrapper {
 
 
     private JBTable createTable() {
-        JBTable table = new JBTable(tableModel);
+        JBTable table = new JBTable(tableModel) {
+            // https://stackoverflow.com/a/37343900/14379
+            @Override
+            public Dimension getPreferredScrollableViewportSize() {
+                return new Dimension(getPreferredSize().width, getRowHeight() * getRowCount());
+            }
+        };
 
         resizeColumnWidthToFitContent(table);
-        preventResizingFirstColumn(table);
+        table.setShowColumns(false);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
         return table;
@@ -77,12 +84,6 @@ public class CoAuthorSelector extends DialogWrapper {
         panel.add(toolbar.getComponent());
 
         return panel;
-    }
-
-
-    private void preventResizingFirstColumn(JBTable table) {
-        TableColumn firstColumn = table.getColumnModel().getColumn(0);
-        firstColumn.setMaxWidth(firstColumn.getWidth());
     }
 
 
